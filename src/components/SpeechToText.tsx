@@ -62,7 +62,6 @@ const SpeechToText: React.FC = () => {
     setCurrentTranscript(''); // Clear the current transcript
     setIsListening(false);
   };
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
       <button

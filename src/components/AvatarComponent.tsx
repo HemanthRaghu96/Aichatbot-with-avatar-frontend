@@ -6,14 +6,15 @@ interface AvatarComponentProps {
 }
 
 const AvatarComponent: React.FC<AvatarComponentProps> = ({ messages }) => {
-   
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [talkId, setTalkId] = useState<string | null>(null);
-  const api_key = 'aGVtYW50aHJhZ2h1OTZAZ21haWwuY29t:2eqExFobhlXNvr5MRFu4r';
+  const [showImage, setShowImage] = useState<boolean>(true); // State to control image display
+  const api_key = 'zg90ytjwawdhbwluz0bnbwfpbc5jb20:9eE8-qQTBPEXojsDu0Bkp';
   const videoRef = useRef<HTMLVideoElement>(null);
-
+console.log(isLoading)
+console.log(talkId)
   const truncateMessage = (message: string, wordLimit: number) => {
     const words = message.split(' ');
     if (words.length > wordLimit) {
@@ -21,6 +22,7 @@ const AvatarComponent: React.FC<AvatarComponentProps> = ({ messages }) => {
     }
     return message;
   };
+
   // Function to create the avatar
   const createAvatar = async () => {
     if (messages.length === 0) {
@@ -35,7 +37,7 @@ const AvatarComponent: React.FC<AvatarComponentProps> = ({ messages }) => {
     const truncatedMessage = truncateMessage(lastMessage, 50);
     const options = {
       method: 'POST',
-      url: 'https://api.d-id.com/talks', // Proxy endpoint
+      url: '/api/talks', // Proxy endpoint
       headers: {
         accept: 'application/json',
         'content-type': 'application/json',
@@ -73,7 +75,7 @@ const AvatarComponent: React.FC<AvatarComponentProps> = ({ messages }) => {
       try {
         const options = {
           method: 'GET',
-          url: `https://api.d-id.com/talks/${talkId}`, // Proxy endpoint
+          url: `/api/talks/${talkId}`, // Proxy endpoint
           headers: {
             accept: 'application/json',
             Authorization: `Basic ${api_key}`,
@@ -83,6 +85,7 @@ const AvatarComponent: React.FC<AvatarComponentProps> = ({ messages }) => {
         const response = await axios.request(options);
         if (response.data.status === 'done') {
           setVideoUrl(response.data.result_url);
+          setShowImage(false); // Show the video when it's done
           clearInterval(intervalId);
         } else if (response.data.status === 'failed') {
           setError('Video creation failed');
@@ -102,23 +105,45 @@ const AvatarComponent: React.FC<AvatarComponentProps> = ({ messages }) => {
     }
   }, [videoUrl]);
 
+  // Handle video end event to switch back to the image
+  const handleVideoEnd = () => {
+    setShowImage(true); // Show the image again after the video ends
+  };
+
+  // Automatically trigger the avatar creation when a new message is received
+  useEffect(() => {
+    if (messages.length > 0) {
+      createAvatar();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messages]); // Re-run when messages change
+console.log(videoUrl)
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Create Avatar Video</h1>
-      {!videoUrl && (
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-          onClick={createAvatar}
-          disabled={isLoading}
-        >
-          {isLoading ? 'Creating...' : 'Create Avatar'}
-        </button>
-      )}
+      <h1 className="text-2xl font-bold mb-4">Live Chat Avatar</h1>
+      
       {error && <p className="text-red-500 mt-4">{error}</p>}
-      {videoUrl && (
+      
+      {/* Display the image or the video based on the showImage state */}
+      {showImage && (
         <div className="mt-4">
-          <h2 className="text-lg font-semibold mb-2">Generated Video:</h2>
-          <video ref={videoRef} src={videoUrl} controls className="w-full max-w-md"></video>
+          <img
+            src="https://d-id-public-bucket.s3.us-west-2.amazonaws.com/alice.jpg"
+            alt="Avatar Placeholder"
+            className="w-full max-w-md h-96 object-contain"
+          />
+        </div>
+      )}
+
+      {videoUrl && !showImage && (
+        <div className="mt-4">
+          <video
+            ref={videoRef}
+            src={videoUrl}
+           
+             className="w-full max-w-md h-96 object-contain"
+            onEnded={handleVideoEnd} // Event listener for video end
+          ></video>
         </div>
       )}
     </div>

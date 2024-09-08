@@ -40,9 +40,9 @@ const ChatPage: React.FC<ChatPageProps> = ({ message }) => {
   };
 console.log(cleanedMessages)
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <div className="h-96 border rounded overflow-y-auto mb-4 p-4">
-        {cleanedMessages.map((msg, index) => (
+   
+      <div className="h-full border rounded  mb-4 p-4">
+        {/* {cleanedMessages.map((msg, index) => (
           <div key={index} className="mb-2">
             {msg.user && (
               <div className="text-right mb-2">
@@ -59,10 +59,10 @@ console.log(cleanedMessages)
               </div>
             )}
           </div>
-        ))}
+        ))} */}
         <AvatarComponent messages={cleanedMessages}/>
       </div>
-    </div>
+   
   );
 };
 
