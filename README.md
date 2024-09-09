@@ -1,50 +1,22 @@
-# React + TypeScript + Vite
+# AIChatBot with avatar frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ I’m excited to share with you a project I’ve recently developed—a cutting-edge voice-interactive chatbot. Here’s a rundown of what I’ve accomplished:
 
-Currently, two official plugins are available:
+Avatar Integration: I’ve set up an account with [D-iD], integrating their API to provide instant, realistic avatars for our chatbot.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Natural Language Processing: For the chatbot’s language capabilities, I’ve utilized [Gemini]—a powerful LLM with free API access that enhances the chatbot's conversational skills.
 
-## Expanding the ESLint configuration
+Voice Interaction: This project features a natural user interface where interaction occurs through voice. It’s designed to make conversations seamless and intuitive.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Innovative Topics: I’ve designed the chatbot to be open-ended.
 
-- Configure the top-level `parserOptions` property like this:
+Hands-Free Design: I’ve implemented a hands-free interface, considering how to detect when users finish speaking and when the avatar should respond. This ensures a smooth and natural conversation flow.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Simple UI: The user interface is clean and minimalistic.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Tech Stack: The project uses React, TailwindCSS for styling, TypeScript for a robust, typesafe development experience. The code is written in TSX, ensuring top-notch error handling and readability.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Frontend Server link : https://aichatbot-with-avatar.netlify.app/
+Demo Link : https://www.loom.com/share/69f067a7e86740ba9f87cef6dbf5f4c2 
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+This project is open scorce, 🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩
