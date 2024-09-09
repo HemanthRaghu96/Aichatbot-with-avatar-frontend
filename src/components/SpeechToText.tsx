@@ -64,6 +64,8 @@ const SpeechToText: React.FC = () => {
   };
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
+       <h1 className='font-bold text-center text-4xl'>AIChatbot</h1>
+      <ChatPage message={transcript} />
       <button
         onClick={isListening ? handleStopListening : handleStartListening}
         className={`px-6 py-2 rounded-full text-white focus:outline-none mb-4 flex items-center justify-center gap-2 ${
@@ -73,7 +75,7 @@ const SpeechToText: React.FC = () => {
         {isListening ? <FaMicrophoneSlash size={20} /> : <FaMicrophone size={20} />}
         {isListening ? 'Stop Listening' : 'Start Listening'}
       </button>
-      <ChatPage message={transcript} />
+      
     </div>
   );
 };

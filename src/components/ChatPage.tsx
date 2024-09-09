@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { sendMessageToChatbot } from '../hooks/hook';
-import AvatarComponent from './AvatarComponent';
+import TextToSpeech from './TextToSpeech';
 
 interface ChatPageProps {
   message: string;
@@ -41,7 +41,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ message }) => {
 console.log(cleanedMessages)
   return (
    
-      <div className="h-full border rounded  mb-4 p-4">
+      <div className="h-full  rounded flex items-center justify-center mb-4 p-4">
         {/* {cleanedMessages.map((msg, index) => (
           <div key={index} className="mb-2">
             {msg.user && (
@@ -60,7 +60,7 @@ console.log(cleanedMessages)
             )}
           </div>
         ))} */}
-        <AvatarComponent messages={cleanedMessages}/>
+        <TextToSpeech messages={cleanedMessages}/>
       </div>
    
   );
